@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/thecpFE/static/css/main.9b42f87c.css",
-    "main.js": "/thecpFE/static/js/main.36b97e70.js",
+    "main.js": "/thecpFE/static/js/main.bef4bb87.js",
     "static/js/787.101e2453.chunk.js": "/thecpFE/static/js/787.101e2453.chunk.js",
     "static/media/cal01.png": "/thecpFE/static/media/cal01.404f0385f25193f27fe1.png",
     "static/media/cal02.png": "/thecpFE/static/media/cal02.f8ac81ab9d94984d7a49.png",
@@ -14,11 +14,11 @@
     "static/media/profile-baisc.svg": "/thecpFE/static/media/profile-baisc.b8428432db0267d9f94e.svg",
     "index.html": "/thecpFE/index.html",
     "main.9b42f87c.css.map": "/thecpFE/static/css/main.9b42f87c.css.map",
-    "main.36b97e70.js.map": "/thecpFE/static/js/main.36b97e70.js.map",
+    "main.bef4bb87.js.map": "/thecpFE/static/js/main.bef4bb87.js.map",
     "787.101e2453.chunk.js.map": "/thecpFE/static/js/787.101e2453.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9b42f87c.css",
-    "static/js/main.36b97e70.js"
+    "static/js/main.bef4bb87.js"
   ]
 }
