@@ -1,0 +1,38 @@
+.tunmnnail-img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background: url(../../img/item01.png) no-repeat;
+    background-size: cover;
+}
+
+.product-thumbnail {
+    padding-right: 10px;
+}
+
+.history-box-item {
+    display: flex;
+    align-items: center;
+}
+    .product-detail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .order-info-date {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .order-info-options {
+        font-size: 14px;
+        
+    }
+.history-box-button .order-info-button {
+    width: 300px;
+    margin: 5px;
+}    
+
+    .history-box-button .order-info-more {
+        width: 50px;
+    }

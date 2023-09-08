@@ -1,0 +1,27 @@
+.container {
+    width: 750px;
+}
+
+.container-header-tab {
+    padding: 16px 17px 17px 16px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 2px 2px 14px 0 rgba(0,164,73,.08);
+    border: solid 1px rgba(125, 145, 137, 0.8); 
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.profile-img-intab {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(http://localhost:3000/static/media/profile-baisc.b842843….svg) no-repeat;
+    background-size: cover;
+}
+
+.info-tab-first {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
