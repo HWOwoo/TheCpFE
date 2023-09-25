@@ -1,74 +1,102 @@
-import { Fragment } from "react";
+import { Fragment,useState,useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import { styled } from "styled-components";
 
 const SingForm = () => {
-  const { handleSubmit, register, formState: { errors }, getValues } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // 폼 데이터를 처리하는 로직을 작성합니다.
-    
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    nickname: '',
+    name: ''
+  });
+  
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 이 부분에서 fetch를 사용하여 회원가입 API를 호출합니다.
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('회원가입에 실패했습니다.');
+        }
+      })
+      .then((data) => {
+        // 성공적으로 회원가입된 경우
+        console.log('회원가입 성공:', data);
+        setErrorMessage('회원가입이 성공적으로 완료되었습니다.');
+      })
+      .catch((error) => {
+        // 회원가입 실패 또는 에러 발생 시
+        console.error('회원가입 에러:', error);
+        setErrorMessage('회원가입 중 오류가 발생했습니다.');
+      });
+  };
   return (
     <Fragment>
       <SignFormMother className="sign-form-home">
         <SignFormContents className="sign-form-contents">
           <h2>로고</h2>
-          <form onSubmit={handleSubmit(onSubmit)}> {/* form 요소로 감싸고 onSubmit 이벤트를 handleSubmit으로 설정합니다. */}
+          <form onSubmit={handleSubmit}> 
+          {/* form 요소로 감싸고 onSubmit 이벤트를 handleSubmit으로 설정합니다. */}
             <CustomFormGroup>
             <Form.Control
                 type="text"
                 placeholder="이메일"
                 name="email"
-                {...register("email", {
-                    required: true,
-                    pattern: /^\S+@\S+$/i
-                })}
-            />
-              {errors.email && errors.email.type === "required" && (
-                <ErrorMessage>이메일은 필수 입력 항목입니다.</ErrorMessage>
-              )}
-              {errors.email && errors.email.type === "pattern" && (
-                <ErrorMessage>유효한 이메일 주소를 입력해주세요.</ErrorMessage>
-              )}
+                value={formData.email}
+                onChange={handleChange}
+              />
+            <Form.Control
+                type="text"
+                placeholder="이름"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
             <Form.Control
               type="password"
               placeholder="비밀번호"
               name="password"
-              {...register("password", {
-                  required: true,
-                  minLength: 6
-              })}
+              value={formData.password}
+              onChange={handleChange}
             />
-              {errors.password && errors.password.type === "required" && (
-                <ErrorMessage>비밀번호는 필수 입력 항목입니다.</ErrorMessage>
-              )}
-              {errors.password && errors.password.type === "minLength" && (
-                <ErrorMessage>비밀번호는 최소 6자 이상이어야 합니다.</ErrorMessage>
-              )}
             <Form.Control
               type="password"
               placeholder="비밀번호 확인"
               name="confirmPassword"
-              {...register("confirmPassword", {
-                  required: true,
-                  validate: (value) =>
-                  value === getValues("password") || "비밀번호가 일치하지 않습니다."
-              })}
+              value={formData.confirmPassword}
+              onChange={handleChange}
             />
-              {errors.confirmPassword && errors.confirmPassword.type === "required" && (
-                <ErrorMessage>비밀번호 확인은 필수 입력항목입니다.</ErrorMessage>
-              )}
-              {errors.confirmPassword && errors.confirmPassword.type === "validate" && (
-                <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-              )}
+              <Form.Control
+              type="text"
+              placeholder="닉네임"
+              name="nickname"
+              value={formData.nickname}
+              onChange={handleChange}
+            />
             </CustomFormGroup>
             <div className="content-item-button">
               <LoginButton style={{ width: '350px' }} type="submit">회원가입</LoginButton> {/* 제출 버튼에 type="submit"을 추가하여 폼 제출을 처리합니다. */}
             </div>
           </form>
+          {errorMessage && <p>{errorMessage}</p>}
         </SignFormContents>
       </SignFormMother>
     </Fragment>

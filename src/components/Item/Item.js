@@ -42,6 +42,7 @@ const Item = () => {
                         </div>
                     </div>
                     <ItemCard/>
+                    <ItemCard/>
                 </div>
             </div>
         </Fragment>

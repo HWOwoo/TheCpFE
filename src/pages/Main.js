@@ -4,14 +4,27 @@ import MenuTab from '../components/menutab/MenuTab';
 import styled from 'styled-components';
 import Fnb from '../components/fnb/Fnb';
 
+import { useEffect, useState } from 'react';
+
 const Main = () => {
+
+    const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        fetch('/api/home')
+            .then(response => response.text())
+            .then(message => {
+                setMessage(message)
+            });
+        }, []);
+
     return (
         <MainContent>
+            <div>{message}</div>
             <Gnb />
             <MenuTab />
             <Carousel />
             <ContentView className='main-content'>
-
             </ContentView>
             <Fnb/>
         </MainContent>

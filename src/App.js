@@ -16,9 +16,11 @@ import JongGoPage from './pages/daangn/JongGoPage';
 
 
 const App = () => {
+  
   return (
+    
     <>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes basename={process.env.PUBLIC_URL}>
         {/* 메인 */}
         <Route path="/" element={<Main />} />

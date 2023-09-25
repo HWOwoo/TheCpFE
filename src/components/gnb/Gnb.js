@@ -2,6 +2,7 @@ import { Fragment,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
+import { getAuthToken,tokenUserInfo,logoutActionHandler } from "../../global/auth";
 import Modal from 'react-modal';
 import Sidebar from "../sidebar/Sidebar";
 import GnbLog from '../../img/log.png';
@@ -26,6 +27,10 @@ const Gnb = () => {
         navigate("/");
     }      
 
+    const token =  getAuthToken();
+    const decodedToken = tokenUserInfo(token);
+
+
     return (
         <Fragment>
             <GnbHeader className="gnb-header">
@@ -47,7 +52,9 @@ const Gnb = () => {
                 </GnbFindBox>
                 <div className="gnb-right">
                     <StyledButton variant="outline-secondary" onClick={()=> setModalIsOpen(true)}>로그인</StyledButton>
-                        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+                        <Modal 
+                            appElement={document.getElementById('root')}
+                            isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
                             style={{
                                 overlay: {
                                     display: 'flex',
@@ -64,8 +71,15 @@ const Gnb = () => {
                             }}>
                             <LoginContent/>
                         </Modal>
-                    <Button onClick={goToSign} variant="outline-secondary">회원가입</Button>
-                    <Button onClick={goToMyInfo} variant="outline-secondary">마이페이지</Button>
+                        <Button onClick={goToSign} variant="outline-secondary">회원가입</Button>
+                    {/* 토큰이 존재하는 경우에만 "마이페이지" 버튼을 렌더링합니다. */}
+                    {token && (
+                        <div>
+                            <Button onClick={goToMyInfo} variant="outline-secondary">마이페이지</Button>
+                            <Button onClick={logoutActionHandler} variant="outline-secondary">로그아웃</Button>
+                            <span>{decodedToken.nickname}</span>
+                        </div>
+                    )}
                 </div>
             </GnbHeader>
         </Fragment>
