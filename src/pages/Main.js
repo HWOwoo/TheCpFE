@@ -14,7 +14,6 @@ const Main = () => {
         fetch('/api/home')
             .then(response => response.text())
             .then(message => {
-                setMessage(message)
             });
         }, []);
 

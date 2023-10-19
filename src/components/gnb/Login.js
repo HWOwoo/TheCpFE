@@ -94,10 +94,14 @@ const LoginContent = () => {
                     <span>간편 로그인</span>
                     <FastLoginWapper>
                         <div>
-                            <img alt="" src={Kakao} />
+                            <a href="http://localhost:8080/oauth2/authorization/kakao">
+                                <img alt="" src={Kakao} />
+                            </a>
                         </div>
                         <div>
-                            <img alt="" src={Google} />
+                            <a href="http://localhost:8080/oauth2/authorization/google">
+                                <img alt="" src={Google} />
+                            </a>
                         </div>
                         <div>
                             <img alt="" src={Apple} />
